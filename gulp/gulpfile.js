@@ -18,9 +18,9 @@ const gzip_options = {
 };
 
 // TODO: Load configs from json
-//const config = require('./fe_configs/websites.json');
-//function websites(done) {
-//  let array = config.websites;
+//const config = require('./fe_configs/my_app.json');
+//function my_app(done) {
+//  let array = config.my_app;
 //  console.log(' ');
 //  for (let index = 0; index < array.length; index++) {
 //    const element = array[index];
@@ -29,15 +29,27 @@ const gzip_options = {
 //  console.log(' ');
 //  done();
 //};
-//exports.websites = websites
+//exports.my_app = my_app
 
-// Paths for all projects. Create a new contant function per app
+// Import from packages.json
+//const gulpPackages = require('./package.json');
+//const gulpDependencies = Object.keys(gulpPackages.devDependencies);
+//for (const key in gulpDependencies) {
+//    if (gulpDependencies.hasOwnProperty(key)) {
+//        const element = gulpDependencies[key];
+//        let str = element.replace('gulp-', '').replace('-', '_') + ' = require("' + element + '");';
+//        eval(str);
+//    }
+//}
+//// Can use gulpPackages.name;
+
+// Paths for all projects. Create a new constant function per app
 const dist = './static/'; // There should only be 1 dist for entire project (not per app)
-const websites = new function() {
-    this.root = './content_services/websites/';
+const my_app = new function() {
+    this.root = './my_app/';
     this.all = this.root + '**/*.*';
     this.templates = this.root + 'templates/**/*.*';
-    this.static = this.root + 'static_files/websites/';
+    this.static = this.root + 'static_files/';
     this.sass = this.static + 'css/';
     this.js = this.static + 'js/';
     this.images = this.static + 'images/';
@@ -46,36 +58,36 @@ const websites = new function() {
 
 
 // Image optimization, minify Images
-gulp.task('websites:images', function() {
+gulp.task('my_app:images', function() {
     return (
         gulp
-            .src(websites.images + '**/*.*')
+            .src(my_app.images + '**/*.*')
             .pipe(imagemin())
-            .pipe(gulp.dest(websites.dist))
+            .pipe(gulp.dest(my_app.dist))
     )
 });
 
 // Compile Sass
-gulp.task('websites:sass', function() {
-    return gulp.src(websites.sass + '*.scss')
+gulp.task('my_app:sass', function() {
+    return gulp.src(my_app.sass + '*.scss')
         .pipe(sass()).on('error', sass.logError)
-        .pipe(gulp.dest(websites.dist + 'css/'))
+        .pipe(gulp.dest(my_app.dist + 'css/'))
         .pipe(rename({suffix: '.min'}))
         .pipe(minifycss())
-        .pipe(gulp.dest(websites.dist + 'css/'))
+        .pipe(gulp.dest(my_app.dist + 'css/'))
         .pipe(gzip(gzip_options))
-        .pipe(gulp.dest(websites.dist + 'css/'))
+        .pipe(gulp.dest(my_app.dist + 'css/'))
 });
 
 // Compile js
-gulp.task('websites:js', function() {
-    return gulp.src(websites.js + '**/*.js', {
+gulp.task('my_app:js', function() {
+    return gulp.src(my_app.js + '**/*.js', {
                 sourcemaps: true
             })
-            .pipe(gulp.dest(websites.dist + 'js/'))
+            .pipe(gulp.dest(my_app.dist + 'js/'))
             .pipe(terser())
             .pipe(rename({suffix: '.min'}))
-            .pipe(gulp.dest(websites.dist + 'js/'))
+            .pipe(gulp.dest(my_app.dist + 'js/'))
 });
 
 /* Generic project (non-app specific tasks) below */
@@ -88,8 +100,8 @@ gulp.task('watch', function() {
             proxy: "http://localhost:8000"
         });
     
-        gulp.watch(websites.sass + '**/*.scss', gulp.series('websites:sass')).on('change', browserSync.reload);
-        gulp.watch(websites.js + '**/*.scss', gulp.series('websites:js')).on('change', browserSync.reload);            
+        gulp.watch(my_app.sass + '**/*.scss', gulp.series('my_app:sass')).on('change', browserSync.reload);
+        gulp.watch(my_app.js + '**/*.scss', gulp.series('my_app:js')).on('change', browserSync.reload);
     }, 3000);
 });
 
@@ -100,11 +112,11 @@ gulp.task('copy_modules', function(done) {
       './node_modules/vue/dist/vue.js',
       './node_modules/vue/dist/vue.min.js'
     ]
-    gulp.src(js_sources).pipe(gulp.dest(websites.dist + 'js/'));
+    gulp.src(js_sources).pipe(gulp.dest(my_app.dist + 'js/'));
 
     // Could also include other sources, i.e. css as needed
     // css_sources = []
-    // gulp.src(css_sources).pipe(gulp.dest(websites.dist + 'css/'));
+    // gulp.src(css_sources).pipe(gulp.dest(my_app.dist + 'css/'));
 
     done()
 });
@@ -112,7 +124,7 @@ gulp.task('copy_modules', function(done) {
 
 // SASS linting
 gulp.task('lint_sass', function () {
-  return gulp.src(websites.sass)
+  return gulp.src(my_app.sass)
     .pipe(sassLint())
     .pipe(sassLint.format())
     .pipe(sassLint.failOnError())
@@ -120,7 +132,7 @@ gulp.task('lint_sass', function () {
 
 // JS linting
 gulp.task('lint_js', function() {
-  return gulp.src(websites.js).pipe(eslint({
+  return gulp.src(my_app.js).pipe(eslint({
     'rules': {
         'quotes': [1, 'single'],
         'semi': [1, 'always']
@@ -133,7 +145,7 @@ gulp.task('lint_js', function() {
 
 
 
-gulp.task('build', gulp.series('websites:js', 'websites:sass', 'copy_modules'));
+gulp.task('build', gulp.series('my_app:js', 'my_app:sass', 'copy_modules'));
 gulp.task('default', gulp.series('build'));
 
 

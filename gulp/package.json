@@ -1,6 +1,6 @@
 {
-  "name": "django-content-services",
-  "description": "Django Content Services - CRUD for WCM database models including API and content building services",
+  "name": "gulp-to-webpack",
+  "description": "gulp 2 webpack",
   "main": "gulpfile.js",
   "directories": {
     "doc": "docs"
@@ -23,20 +23,20 @@
     "onchange": "^5.2.0"
   },
   "scripts": {
-    "test": "cd content_services && ./manage.py test",
-    "watch": "onchange './content_services/websites/templates/**/*.*' -- touch content_services/settings.py",
-    "runserver": "cd content_services && ./manage.py runserver",
+    "test": "cd my_project && ./manage.py test",
+    "watch": "onchange './my_project/my_app/templates/**/*.*' -- touch my_project/settings.py",
+    "runserver": "cd my_project && ./manage.py runserver",
     "develop": "npm run runserver & npm run watch & gulp watch"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Postmedia-Digital/django-content-services.git"
+    "url": "git@github.com:radzhome/gulp-to-webpack.git"
   },
   "author": "",
   "license": "LicenseRef-LICENSE",
   "private": true,
   "bugs": {
-    "url": "https://github.com/Postmedia-Digital/django-content-services/issues"
+    "url": "git@github.com:radzhome/gulp-to-webpack.git/issues"
   },
-  "homepage": "https://github.com/Postmedia-Digital/django-content-services#readme"
+  "homepage": "git@github.com:radzhome/gulp-to-webpack.git#readme"
 }
