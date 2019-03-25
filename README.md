@@ -8,6 +8,8 @@ To convert gulp to webpack, as a FE task runner.
 Babel tutorial - https://www.valentinog.com/blog/webpack-tutorial/#webpack_4_transpiling_Javascript_ES6_with_Babel
 
 
+Intro to webpack - https://www.sitepoint.com/beginners-guide-webpack-module-bundling/
+
 ## Steps
 
 1. `npm init -y`
