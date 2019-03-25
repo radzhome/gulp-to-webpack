@@ -10,6 +10,8 @@ Babel tutorial - https://www.valentinog.com/blog/webpack-tutorial/#webpack_4_tra
 
 Intro to webpack - https://www.sitepoint.com/beginners-guide-webpack-module-bundling/
 
+HTML webpack plugin (multiple html files) - https://dev.to/rodeghiero_/multiple-html-files-with-htmlwebpackplugin-19bf
+
 ## Steps
 
 1. `npm init -y`
