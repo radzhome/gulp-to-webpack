@@ -23,10 +23,8 @@
     "onchange": "^5.2.0"
   },
   "scripts": {
-    "test": "cd my_project && ./manage.py test",
-    "watch": "onchange './my_project/my_app/templates/**/*.*' -- touch my_project/settings.py",
-    "runserver": "cd my_project && ./manage.py runserver",
-    "develop": "npm run runserver & npm run watch & gulp watch"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "develop": "gulp watch"
   },
   "repository": {
     "type": "git",

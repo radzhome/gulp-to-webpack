@@ -44,15 +44,15 @@ const gzip_options = {
 //// Can use gulpPackages.name;
 
 // Paths for all projects. Create a new constant function per app
-const dist = './static/'; // There should only be 1 dist for entire project (not per app)
+const dist = './dist/'; // There should only be 1 dist for entire project (not per app)
 const my_app = new function() {
-    this.root = './my_app/';
+    this.root = './src/';
     this.all = this.root + '**/*.*';
-    this.templates = this.root + 'templates/**/*.*';
-    this.static = this.root + 'static_files/';
-    this.sass = this.static + 'css/';
+    this.templates = this.root + 'html/**/*.*';
+    this.static = this.root;
+    this.sass = this.static + '_scss/';
     this.js = this.static + 'js/';
-    this.images = this.static + 'images/';
+    this.images = this.static + 'img/';
     this.dist = dist;
 };
 
@@ -94,17 +94,28 @@ gulp.task('my_app:js', function() {
 
 
 // Watch Files For Changes
-gulp.task('watch', function() {
-    setTimeout(() => {
-        browserSync.init({
-            proxy: "http://localhost:8000"
-        });
-    
-        gulp.watch(my_app.sass + '**/*.scss', gulp.series('my_app:sass')).on('change', browserSync.reload);
-        gulp.watch(my_app.js + '**/*.scss', gulp.series('my_app:js')).on('change', browserSync.reload);
-    }, 3000);
-});
+//gulp.task('watch', function() {
+//    setTimeout(() => {
+//        browserSync.init({
+//            proxy: "http://localhost:8000"
+//        });
+//
+//        gulp.watch(my_app.sass + '**/*.scss', gulp.series('my_app:sass')).on('change', browserSync.reload);
+//        gulp.watch(my_app.js + '**/*.scss', gulp.series('my_app:js')).on('change', browserSync.reload);
+//    }, 3000);
+//});
 
+
+gulp.task('watch', function() {
+    browserSync.init({
+        server: {
+            baseDir: "./src/html"
+        }
+    });
+    gulp.watch(my_app.sass + '**/*.scss', gulp.series('my_app:sass')).on('change', browserSync.reload);
+    gulp.watch(my_app.js + '**/*.scss', gulp.series('my_app:js')).on('change', browserSync.reload);
+    //gulp.watch(my_app.templates + '**/*.html', gulp.series('my_app:html')).on('change', browserSync.reload);
+});
 
 // Copy 3rd party modules to static
 gulp.task('copy_modules', function(done) {

@@ -1,0 +1,42 @@
+{
+  "name": "gulp-to-webpack",
+  "description": "gulp 2 webpack",
+  "main": "gulpfile.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "dependencies": {
+    "vue": "^2.6.9"
+  },
+  "devDependencies": {
+    "gulp": "^4.0.0",
+    "gulp-gzip": "^1.4.2",
+    "gulp-minify-css": "^1.2.4",
+    "gulp-rename": "^1.4.0",
+    "gulp-sass": "^4.0.2",
+    "gulp-terser": "^1.1.7",
+    "browser-sync": "^2.26.3",
+    "gulp-eslint": "^5.0.0",
+    "gulp-imagemin": "^5.0.3",
+    "gulp-sass-lint": "^1.4.0",
+    "gulp-watch": "5.0.1",
+    "onchange": "^5.2.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "watch": "onchange './src/html/**/*.*' -- touch my_project/settings.py",
+    "runserver": "cd my_project && ./manage.py runserver",
+    "develop": "npm run runserver & npm run watch & gulp watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:radzhome/gulp-to-webpack.git"
+  },
+  "author": "",
+  "license": "LicenseRef-LICENSE",
+  "private": true,
+  "bugs": {
+    "url": "git@github.com:radzhome/gulp-to-webpack.git/issues"
+  },
+  "homepage": "git@github.com:radzhome/gulp-to-webpack.git#readme"
+}
