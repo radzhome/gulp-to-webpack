@@ -12,6 +12,8 @@ Intro to webpack - https://www.sitepoint.com/beginners-guide-webpack-module-bund
 
 HTML webpack plugin (multiple html files) - https://dev.to/rodeghiero_/multiple-html-files-with-htmlwebpackplugin-19bf
 
+dev server for webpack config - https://webpack.js.org/configuration/dev-server/
+
 ## Steps
 
 1. `npm init -y`
